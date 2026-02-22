@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site_name }}{% endblock %}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="header">{% block header %}{% endblock %}{% if owner_name %}
+<div class="owner">{{ owner_name }}{% if owner_email %} &lt;{{ owner_email }}&gt;{% endif %}</div>{% endif %}</div>
+{% block content %}{% endblock %}
+</body>
+</html>

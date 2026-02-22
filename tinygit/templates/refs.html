@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} / {{ repo_name }} / refs{% endblock %}
+{% block header %}<a href="/">{{ site_name }}</a> / <a href="/{{ repo_name }}/">{{ repo_name }}</a> / refs{% endblock %}
+{% block content %}
+<div class="nav"><a href="/{{ repo_name }}/tree/{{ branch }}/">tree</a> | <a href="/{{ repo_name }}/log/">log</a></div>
+<hr>
+<h2>branches</h2>
+<table>
+{% for b in refs.branches %}
+<tr>
+<td class="name-col"><a href="/{{ repo_name }}/tree/{{ b.name }}/">{{ b.name }}</a></td>
+<td class="hash-col">{{ b.hash }}</td>
+<td class="date-col">{{ b.date }}</td>
+</tr>
+{% else %}
+<tr><td>none</td></tr>
+{% endfor %}
+</table>
+
+<h2>tags</h2>
+<table>
+{% for t in refs.tags %}
+<tr>
+<td class="name-col"><a href="/{{ repo_name }}/tree/{{ t.name }}/">{{ t.name }}</a></td>
+<td class="hash-col">{{ t.hash }}</td>
+<td class="date-col">{{ t.date }}</td>
+</tr>
+{% else %}
+<tr><td>none</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

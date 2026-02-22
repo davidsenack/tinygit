@@ -1,0 +1,37 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Courier New', Courier, monospace; font-size: 14px; font-weight: bold; line-height: 1.6; color: #222; background: #fff; padding: 2em; max-width: 72em; margin: 0 auto; }
+a { color: #222; }
+a:hover { color: #555; }
+pre { white-space: pre-wrap; word-wrap: break-word; line-height: 1.5; }
+hr { display: none; }
+h1, h2, h3, h4, h5, h6 { font-size: 14px; font-weight: bold; margin: 1.5em 0 0.5em; }
+.header { margin-bottom: 1.5em; }
+.header a { text-decoration: none; }
+.nav { margin-bottom: 2em; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 2em; }
+th, td { padding: 3px 0; text-align: left; font: inherit; }
+td a { text-decoration: none; }
+td a:hover { text-decoration: underline; }
+.name-col { padding-right: 2em; }
+.desc-col { padding-right: 2em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 30em; }
+.date-col { white-space: nowrap; }
+.size-col { padding-right: 2em; text-align: right; white-space: nowrap; }
+.hash-col { padding-right: 1em; }
+.author-col { padding-right: 1em; }
+.footer { margin-top: 4em; }
+.readme { margin-top: 3em; }
+.readme img { display: none; }
+.readme p { margin: 0.5em 0; }
+.readme pre { margin: 0.5em 0; padding: 0.5em; background: #f8f8f8; }
+.readme code { background: #f8f8f8; padding: 0 3px; }
+.readme ul, .readme ol { margin: 0.5em 0 0.5em 2em; }
+pre.diff { margin-top: 1.5em; }
+.diff-add { color: #060; }
+.diff-del { color: #900; }
+.diff-hunk { color: #609; }
+.diff-meta { font-weight: bold; }
+.ln { color: #999; user-select: none; }
+.highlight { margin-top: 1.5em; }
+.highlight table { border: none; }
+.highlight td { border: none; padding: 0 4px; }
+.highlight .linenodiv pre { color: #999; background: none; user-select: none; }

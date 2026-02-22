@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} / {{ repo_name }} / log{% endblock %}
+{% block header %}<a href="/">{{ site_name }}</a> / <a href="/{{ repo_name }}/">{{ repo_name }}</a> / log{% endblock %}
+{% block content %}
+<div class="nav"><a href="/{{ repo_name }}/tree/{{ ref }}/">tree</a> | <a href="/{{ repo_name }}/refs/">refs</a> | {{ ref }}</div>
+<hr>
+<table>
+{% for c in commits %}
+<tr>
+<td class="hash-col"><a href="/{{ repo_name }}/commit/{{ c.hash }}">{{ c.short_hash }}</a></td>
+<td class="date-col">{{ c.date }}</td>
+<td class="author-col">{{ c.author }}</td>
+<td class="msg-col">{{ c.subject }}</td>
+</tr>
+{% endfor %}
+</table>
+{% if total_pages > 1 %}
+<hr>
+<div class="nav">page {{ page }}/{{ total_pages }}{% if page > 1 %} | <a href="?page={{ page - 1 }}">prev</a>{% endif %}{% if page < total_pages %} | <a href="?page={{ page + 1 }}">next</a>{% endif %}</div>
+{% endif %}
+{% endblock %}

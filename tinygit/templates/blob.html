@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} / {{ repo_name }} / {{ filename }}{% endblock %}
+{% block header %}<a href="/">{{ site_name }}</a> / <a href="/{{ repo_name }}/">{{ repo_name }}</a> / {{ filepath }}{% endblock %}
+{% block content %}
+<div class="nav">{{ ref }} | {{ size }} | <a href="/{{ repo_name }}/raw/{{ ref }}/{{ filepath }}">raw</a></div>
+<hr>
+{% if binary %}
+<pre>binary file, {{ size }} — <a href="/{{ repo_name }}/raw/{{ ref }}/{{ filepath }}">download</a></pre>
+{% elif highlighted %}
+{{ content|safe }}
+{% else %}
+<pre>{{ content|safe }}</pre>
+{% endif %}
+{% endblock %}

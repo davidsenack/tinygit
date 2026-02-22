@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block header %}<a href="/">{{ site_name }}</a>{% if site_tagline %} — {{ site_tagline }}{% endif %}{% endblock %}
+{% block content %}
+<hr>
+<table>
+{% for repo in repos %}
+<tr>
+<td class="name-col"><a href="/{{ repo.name }}/">{{ repo.name }}</a></td>
+<td class="desc-col">{{ repo.description|truncate(60) }}</td>
+<td class="date-col">{{ repo.last_update }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

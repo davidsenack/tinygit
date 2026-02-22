@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} / {{ repo_name }} / {{ commit.short_hash }}{% endblock %}
+{% block header %}<a href="/">{{ site_name }}</a> / <a href="/{{ repo_name }}/">{{ repo_name }}</a> / {{ commit.short_hash }}{% endblock %}
+{% block content %}
+<div class="nav"><a href="/{{ repo_name }}/log/">log</a> | <a href="/{{ repo_name }}/tree/{{ commit.hash }}/">tree</a></div>
+<hr>
+<pre>author  {{ commit.author }} &lt;{{ commit.email }}&gt;
+date    {{ commit.date }}{% if commit.parent_short %}
+parent  <a href="/{{ repo_name }}/commit/{{ commit.parents[0] }}">{{ commit.parent_short }}</a>{% endif %}
+
+{{ commit.message }}</pre>
+<hr>
+{% if diff_html %}
+<pre>{{ diff_html|safe }}</pre>
+{% endif %}
+{% endblock %}

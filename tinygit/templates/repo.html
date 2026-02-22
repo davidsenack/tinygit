@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} / {{ repo_name }}{% endblock %}
+{% block header %}<a href="/">{{ site_name }}</a> / <a href="/{{ repo_name }}/">{{ repo_name }}</a>{% if subpath %} / {% for bc in breadcrumb %}<a href="/{{ repo_name }}/tree/{{ ref }}/{{ bc.path }}">{{ bc.name }}</a>{% if not loop.last %} / {% endif %}{% endfor %}{% endif %}{% endblock %}
+{% block content %}
+<div class="nav"><a href="/{{ repo_name }}/log/{{ ref }}">log</a> | <a href="/{{ repo_name }}/refs/">refs</a> | {{ ref }}</div>
+<hr>
+<table>
+{% for entry in entries %}
+<tr>
+{% if entry.type == "tree" %}
+<td class="name-col"><a href="/{{ repo_name }}/tree/{{ ref }}/{{ entry.path }}/">{{ entry.name }}/</a></td>
+{% else %}
+<td class="name-col"><a href="/{{ repo_name }}/blob/{{ ref }}/{{ entry.path }}">{{ entry.name }}</a></td>
+{% endif %}
+<td class="size-col">{{ entry.size }}</td>
+<td class="msg-col">{{ entry.last_commit }}</td>
+</tr>
+{% endfor %}
+</table>
+{% if readme_html %}
+<hr>
+<div class="readme">
+{{ readme_html|safe }}
+</div>
+{% endif %}
+{% endblock %}
