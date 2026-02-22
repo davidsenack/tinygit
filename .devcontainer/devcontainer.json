@@ -1,0 +1,59 @@
+{
+  "name": "Claude Code Sandbox",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+
+  // Mount your project into /workspace
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+
+  // Persistent volumes — survive container rebuilds
+  "mounts": [
+    // Shell history persists between sessions
+    "source=cc-history-${devcontainerId},target=/commandhistory,type=volume",
+    // Claude Code config/auth persists between sessions
+    "source=cc-claude-config-${devcontainerId},target=/home/dev/.claude,type=volume",
+    // Git config from host (read-only)
+    "source=${localEnv:HOME}/.gitconfig,target=/home/dev/.gitconfig,type=bind,readonly"
+  ],
+
+  "containerEnv": {
+    // Bump Node memory for large projects
+    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "CLAUDE_CONFIG_DIR": "/home/dev/.claude",
+    // Persist bash history
+    "HISTFILE": "/commandhistory/.bash_history",
+    "PROMPT_COMMAND": "history -a"
+  },
+
+  // Forward your Anthropic API key from host environment
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+
+  // Run firewall setup on start
+  "postStartCommand": "sudo /usr/local/bin/init-firewall.sh 2>/dev/null || true",
+
+  // Install Claude Code on first create
+  "postCreateCommand": "/usr/local/bin/setup.sh",
+
+  "waitFor": "postCreateCommand",
+
+  // VS Code extensions (optional, remove if you don't use VS Code)
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // Run as non-root user
+  "remoteUser": "dev"
+}
