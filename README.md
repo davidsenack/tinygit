@@ -76,6 +76,47 @@ TINYGIT_SYNTAX_HIGHLIGHT # true/false (default: true)
 TINYGIT_COMMITS_PER_PAGE # default: 30
 ```
 
+## Remote management
+
+Manage repos on a remote server from your local machine. TinyGit must be installed on both machines.
+
+Configure the remote:
+
+```
+tinygit remote set user@myserver.com
+tinygit remote set user@myserver.com --repos-dir /srv/git/repos
+```
+
+Then use the same commands — they run over SSH automatically:
+
+```
+tinygit create myrepo "a short description"
+tinygit list
+tinygit delete myrepo
+```
+
+Start/stop the web UI on the remote:
+
+```
+tinygit serve --port 8080
+tinygit stop
+```
+
+Set up a fresh remote server (creates repos dir, installs tinygit):
+
+```
+tinygit setup
+```
+
+View or clear the remote config:
+
+```
+tinygit remote show
+tinygit remote remove
+```
+
+When no remote is configured, all commands run locally as before.
+
 ## SSH setup
 
 For push/pull access over SSH, run the setup script on your server:
